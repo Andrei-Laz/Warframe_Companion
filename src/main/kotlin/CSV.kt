@@ -5,23 +5,35 @@ import java.io.File
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 
-data class Planta(val id_planta: Int, val nombre_comun: String, val nombre_cientifico: String, val riego: Int, val altura: Double)
+data class Warframe(val warframeId: Int,
+                    val warframeName: String,
+                    val health: Int,
+                    val armor: Int,
+                    val energy: Int,
+                    val sprintSpeed: Double,
+                    val passive: String)
 
 fun main() {
     val entradaCSV = Path.of("game_data/CSV/Warframes.csv")
-    val salidaCSV = Path.of("documentos/mis_plantas2.csv")
-    val datos: List<Planta>
+    val salidaCSV = Path.of("game_data/CSV/Warframes2.csv")
+    val datos: List<Warframe>
     datos = leerDatosInicialesCSV(entradaCSV)
     for (dato in datos) {
 
-        println(" - ID: ${dato.id_planta}, Nombre común: ${dato.nombre_comun}, Nombre científico: ${dato.nombre_cientifico}, Frecuencia de riego: ${dato.riego} días, Altura: ${dato.altura} metros")
+        println(" - ID: ${dato.warframeId}," +
+                " Nombre: ${dato.warframeName}," +
+                " Vida: ${dato.health}," +
+                " Armadura: ${dato.armor}," +
+                " Energía: ${dato.energy}" +
+                " Velocidad de sprint: ${dato.sprintSpeed}" +
+                " Pasiva: ${dato.passive}")
     }
     escribirDatosCSV(salidaCSV, datos)
 }
 
-fun leerDatosInicialesCSV(ruta: Path): List<Planta>
+fun leerDatosInicialesCSV(ruta: Path): List<Warframe>
 {
-    var plantas: List<Planta> =emptyList()
+    var warframes: List<Warframe> =emptyList()
 
     if (!Files.isReadable(ruta)) {
         println("Error: No se puede leer el fichero en la ruta: $ruta")
@@ -33,16 +45,24 @@ fun leerDatosInicialesCSV(ruta: Path): List<Planta>
 
         val filas: List<List<String>> = reader.readAll(ruta.toFile())
 
-        plantas = filas.mapNotNull { columnas ->
+        warframes = filas.mapNotNull { columnas ->
 
             if (columnas.size >= 5) {
                 try {
-                    val id_planta = columnas[0].toInt()
-                    val nombre_comun = columnas[1]
-                    val nombre_cientifico = columnas[2]
-                    val riego = columnas[3].toInt()
-                    val altura = columnas[4].toDouble()
-                    Planta(id_planta,nombre_comun, nombre_cientifico, riego, altura)
+                    val idWarframe = columnas[0].toInt()
+                    val nombre = columnas[1]
+                    val vida = columnas[2].toInt()
+                    val armadura = columnas[3].toInt()
+                    val energia = columnas[4].toInt()
+                    val velocidadSprint = columnas[5].toDouble()
+                    val pasiva = columnas[6]
+                    Warframe(idWarframe,
+                        nombre,
+                        vida,
+                        armadura,
+                        energia,
+                        velocidadSprint,
+                        pasiva)
 
                 } catch (e: Exception) {
 
@@ -57,21 +77,23 @@ fun leerDatosInicialesCSV(ruta: Path): List<Planta>
             }
         }
     }
-    return plantas
+    return warframes
 }
 
-fun escribirDatosCSV(ruta: Path,plantas: List<Planta>){
+fun escribirDatosCSV(ruta: Path, warframes: List<Warframe>){
     try {
         val fichero: File = ruta.toFile()
         csvWriter {
             delimiter = ';'
         }.writeAll(
-            plantas.map { planta ->
-                listOf(planta.id_planta.toString(),
-                    planta.nombre_comun,
-                    planta.nombre_cientifico,
-                    planta.riego.toString(),
-                    planta.altura.toString())
+            warframes.map { warframe ->
+                listOf(warframe.warframeId.toString(),
+                    warframe.warframeName,
+                    warframe.health.toString(),
+                    warframe.armor.toString(),
+                    warframe.energy.toString(),
+                    warframe.sprintSpeed.toString(),
+                    warframe.passive)
             },
             fichero
         )
