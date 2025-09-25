@@ -23,6 +23,7 @@ fun leerDatosInicialesJSON(ruta: Path): List<WarframeJSON> {
     warframes = Json.decodeFromString<List<WarframeJSON>>(jsonString)
     return warframes
 }
+
 fun escribirDatosJSON(ruta: Path, warframes: List<WarframeJSON>) {
     try {
         val json = Json { prettyPrint = true }.encodeToString(warframes)

@@ -42,11 +42,11 @@ fun leerDatosInicialesXML(ruta: Path): List<WarframeXML> {
     return plantasWrapper.listaWarframes
 }
 
-fun escribirDatosXML(ruta: Path,plantas: List<WarframeXML>) {
+fun escribirDatosXML(ruta: Path, warframes: List<WarframeXML>) {
     try {
         val fichero: File = ruta.toFile()
 
-        val contenedorXml = Warframes(plantas)
+        val contenedorXml = Warframes(warframes)
 
         val xmlMapper = XmlMapper().registerKotlinModule()
 
