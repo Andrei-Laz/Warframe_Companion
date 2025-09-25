@@ -7,41 +7,46 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 
-data class Planta(
-    @JacksonXmlProperty(localName = "id_planta")
-    val id_planta: Int,
-    @JacksonXmlProperty(localName = "nombre_comun")
-    val nombre_comun: String,
-    @JacksonXmlProperty(localName = "nombre_cientifico")
-    val nombre_cientifico: String,
-    @JacksonXmlProperty(localName = "frecuencia_riego")
-    val frecuencia_riego: Int,
-    @JacksonXmlProperty(localName = "altura_maxima")
-    val altura_maxima: Double
+data class WarframeXML(
+    @JacksonXmlProperty(localName = "warframe_id")
+    val warframeId: Int,
+    @JacksonXmlProperty(localName = "name")
+    val nombre: String,
+    @JacksonXmlProperty(localName = "health")
+    val vida: Int,
+    @JacksonXmlProperty(localName = "armor")
+    val armadura: Int,
+    @JacksonXmlProperty(localName = "energy")
+    val energia: Int,
+    @JacksonXmlProperty(localName = "sprint_speed")
+    val velocidadSprint: Double,
+    @JacksonXmlProperty(localName = "passive")
+    val pasiva: String
 )
 
-@JacksonXmlRootElement(localName = "plantas")
+@JacksonXmlRootElement(localName = "warframes")
 
-data class Plantas(
+data class Warframes(
     @JacksonXmlElementWrapper(useWrapping = false)
-@JacksonXmlProperty(localName = "planta")
-val listaPlantas: List<Planta> = emptyList()
+@JacksonXmlProperty(localName = "warframe")
+val listaWarframes: List<WarframeXML> = emptyList()
 )
 
-fun leerDatosInicialesXML(ruta: Path): List<Planta> {
+fun leerDatosInicialesXML(ruta: Path): List<WarframeXML> {
 
     val fichero: File = ruta.toFile()
 
     val xmlMapper = XmlMapper().registerKotlinModule()
 
-    val plantasWrapper: Plantas = xmlMapper.readValue(fichero)
-    return plantasWrapper.listaPlantas
+    val plantasWrapper: Warframes = xmlMapper.readValue(fichero)
+    return plantasWrapper.listaWarframes
 }
-fun escribirDatosXML(ruta: Path,plantas: List<Planta>) {
+
+fun escribirDatosXML(ruta: Path,plantas: List<WarframeXML>) {
     try {
         val fichero: File = ruta.toFile()
 
-        val contenedorXml = Plantas(plantas)
+        val contenedorXml = Warframes(plantas)
 
         val xmlMapper = XmlMapper().registerKotlinModule()
 
@@ -56,15 +61,18 @@ fun escribirDatosXML(ruta: Path,plantas: List<Planta>) {
 }
 
 fun main() {
-    val entradaXML = Path.of("documentos/mis_plantas.xml")
-    val salidaXML = Path.of("documentos/mis_plantas2.xml")
-    val datos: List<Planta>
+    val entradaXML = Path.of("game_data/XML/Warframes.xml")
+    val salidaXML = Path.of("game_data/XML/Warframes2.xml")
+    val datos: List<WarframeXML>
     datos = leerDatosInicialesXML(entradaXML)
     for (dato in datos) {
-        println(" - ID: ${dato.id_planta}, Nombre común: ${dato.nombre_comun}, " +
-                "Nombre científico: ${dato.nombre_cientifico}," +
-                " Frecuencia de riego: ${dato.frecuencia_riego} días," +
-                " Altura: ${dato.altura_maxima} metros")
+        println(" - ID: ${dato.warframeId}," +
+                " Nombre: ${dato.nombre}," +
+                " Vida: ${dato.vida}," +
+                " Armadura: ${dato.armadura}," +
+                " Energía: ${dato.energia}" +
+                " Velocidad de sprint: ${dato.velocidadSprint}" +
+                " Pasiva: ${dato.pasiva}")
     }
     escribirDatosXML(salidaXML, datos)
 }

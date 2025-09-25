@@ -5,35 +5,19 @@ import java.io.File
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
 
-data class Warframe(val warframeId: Int,
-                    val warframeName: String,
-                    val health: Int,
-                    val armor: Int,
-                    val energy: Int,
-                    val sprintSpeed: Double,
-                    val passive: String)
+data class WarframeCSV(
+    val warframeId: Int,
+    val name: String,
+    val health: Int,
+    val armor: Int,
+    val energy: Int,
+    val sprintSpeed: Double,
+    val passive: String
+)
 
-fun main() {
-    val entradaCSV = Path.of("game_data/CSV/Warframes.csv")
-    val salidaCSV = Path.of("game_data/CSV/Warframes2.csv")
-    val datos: List<Warframe>
-    datos = leerDatosInicialesCSV(entradaCSV)
-    for (dato in datos) {
-
-        println(" - ID: ${dato.warframeId}," +
-                " Nombre: ${dato.warframeName}," +
-                " Vida: ${dato.health}," +
-                " Armadura: ${dato.armor}," +
-                " Energía: ${dato.energy}" +
-                " Velocidad de sprint: ${dato.sprintSpeed}" +
-                " Pasiva: ${dato.passive}")
-    }
-    escribirDatosCSV(salidaCSV, datos)
-}
-
-fun leerDatosInicialesCSV(ruta: Path): List<Warframe>
+fun leerDatosInicialesCSV(ruta: Path): List<WarframeCSV>
 {
-    var warframes: List<Warframe> =emptyList()
+    var warframes: List<WarframeCSV> =emptyList()
 
     if (!Files.isReadable(ruta)) {
         println("Error: No se puede leer el fichero en la ruta: $ruta")
@@ -56,7 +40,7 @@ fun leerDatosInicialesCSV(ruta: Path): List<Warframe>
                     val energia = columnas[4].toInt()
                     val velocidadSprint = columnas[5].toDouble()
                     val pasiva = columnas[6]
-                    Warframe(idWarframe,
+                    WarframeCSV(idWarframe,
                         nombre,
                         vida,
                         armadura,
@@ -80,7 +64,7 @@ fun leerDatosInicialesCSV(ruta: Path): List<Warframe>
     return warframes
 }
 
-fun escribirDatosCSV(ruta: Path, warframes: List<Warframe>){
+fun escribirDatosCSV(ruta: Path, warframes: List<WarframeCSV>){
     try {
         val fichero: File = ruta.toFile()
         csvWriter {
@@ -88,7 +72,7 @@ fun escribirDatosCSV(ruta: Path, warframes: List<Warframe>){
         }.writeAll(
             warframes.map { warframe ->
                 listOf(warframe.warframeId.toString(),
-                    warframe.warframeName,
+                    warframe.name,
                     warframe.health.toString(),
                     warframe.armor.toString(),
                     warframe.energy.toString(),
@@ -101,4 +85,22 @@ fun escribirDatosCSV(ruta: Path, warframes: List<Warframe>){
     } catch (e: Exception) {
         println("Error: ${e.message}")
     }
+}
+
+fun main() {
+    val entradaCSV = Path.of("game_data/CSV/Warframes.csv")
+    val salidaCSV = Path.of("game_data/CSV/Warframes2.csv")
+    val datos: List<WarframeCSV>
+    datos = leerDatosInicialesCSV(entradaCSV)
+    for (dato in datos) {
+
+        println(" - ID: ${dato.warframeId}," +
+                " Nombre: ${dato.name}," +
+                " Vida: ${dato.health}," +
+                " Armadura: ${dato.armor}," +
+                " Energía: ${dato.energy}" +
+                " Velocidad de sprint: ${dato.sprintSpeed}" +
+                " Pasiva: ${dato.passive}")
+    }
+    escribirDatosCSV(salidaCSV, datos)
 }

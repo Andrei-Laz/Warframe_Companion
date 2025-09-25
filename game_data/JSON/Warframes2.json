@@ -1,0 +1,47 @@
+[
+    {
+        "warframe_id": 1,
+        "name": "Excalibur",
+        "health": 300,
+        "armor": 150,
+        "energy": 150,
+        "sprint_speed": 1.2,
+        "passive": "Excalibur gains +10% attack speed and damage with melee weapons"
+    },
+    {
+        "warframe_id": 2,
+        "name": "Titania",
+        "health": 250,
+        "armor": 100,
+        "energy": 200,
+        "sprint_speed": 1.15,
+        "passive": "Titania has +25% bullet speed and rolling distance"
+    },
+    {
+        "warframe_id": 3,
+        "name": "Wukong",
+        "health": 300,
+        "armor": 200,
+        "energy": 100,
+        "sprint_speed": 1.1,
+        "passive": "Wukong has three extra lives"
+    },
+    {
+        "warframe_id": 4,
+        "name": "Mesa",
+        "health": 200,
+        "armor": 100,
+        "energy": 200,
+        "sprint_speed": 1.15,
+        "passive": "Mesa gains +15% fire rate with dual wielded sidearms. +25% reload speed for one handed sidearms."
+    },
+    {
+        "warframe_id": 5,
+        "name": "Frost",
+        "health": 300,
+        "armor": 200,
+        "energy": 100,
+        "sprint_speed": 1.05,
+        "passive": "Frost gains +25% critical chance against frozen enemies"
+    }
+]

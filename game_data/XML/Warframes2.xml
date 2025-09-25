@@ -1,0 +1,47 @@
+<warframes>
+  <warframe>
+    <warframe_id>1</warframe_id>
+    <name>Excalibur</name>
+    <health>300</health>
+    <armor>150</armor>
+    <energy>150</energy>
+    <sprint_speed>1.2</sprint_speed>
+    <passive>Excalibur gains +10% attack speed and damage with melee weapons</passive>
+  </warframe>
+  <warframe>
+    <warframe_id>2</warframe_id>
+    <name>Titania</name>
+    <health>250</health>
+    <armor>100</armor>
+    <energy>200</energy>
+    <sprint_speed>1.15</sprint_speed>
+    <passive>Titania has +25% bullet speed and rolling distance</passive>
+  </warframe>
+  <warframe>
+    <warframe_id>3</warframe_id>
+    <name>Wukong</name>
+    <health>300</health>
+    <armor>200</armor>
+    <energy>100</energy>
+    <sprint_speed>1.1</sprint_speed>
+    <passive>Wukong has three extra lives</passive>
+  </warframe>
+  <warframe>
+    <warframe_id>4</warframe_id>
+    <name>Mesa</name>
+    <health>200</health>
+    <armor>100</armor>
+    <energy>200</energy>
+    <sprint_speed>1.15</sprint_speed>
+    <passive>Mesa gains +15% fire rate with dual wielded sidearms. +25% reload speed for one handed sidearms.</passive>
+  </warframe>
+  <warframe>
+    <warframe_id>5</warframe_id>
+    <name>Frost</name>
+    <health>300</health>
+    <armor>200</armor>
+    <energy>100</energy>
+    <sprint_speed>1.05</sprint_speed>
+    <passive>Frost gains +25% critical chance against frozen enemies</passive>
+  </warframe>
+</warframes>
