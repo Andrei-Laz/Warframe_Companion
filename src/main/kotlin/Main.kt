@@ -52,4 +52,18 @@ fun main() {
     } catch (e: Exception) {
         e.printStackTrace()
     }
+
+    println("\n=== Gestión de fichero binario ===")
+    vaciarCrearFichero()
+    importarDesdeJSON()
+    mostrar()
+
+    println("\n--- Modificando registro ID=1 ---")
+    modificar(1, "Excalibur Prime", "Energía infinita")
+    mostrar()
+
+    println("\n--- Eliminando registro ID=2 ---")
+    eliminar(2)
+    mostrar()
+
 }
