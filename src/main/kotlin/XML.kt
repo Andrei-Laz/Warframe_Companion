@@ -60,18 +60,17 @@ fun escribirDatosXML(ruta: Path, warframes: List<WarframeXML>) {
     }
 }
 
-fun main() {
+fun ejecutarXML() {
     val entradaXML = Path.of("game_data/XML/Warframes.xml")
     val salidaXML = Path.of("game_data/XML/Warframes2.xml")
-    val datos: List<WarframeXML>
-    datos = leerDatosInicialesXML(entradaXML)
+    val datos = leerDatosInicialesXML(entradaXML)
     for (dato in datos) {
         println(" - ID: ${dato.warframeId}," +
                 " Nombre: ${dato.nombre}," +
                 " Vida: ${dato.vida}," +
                 " Armadura: ${dato.armadura}," +
-                " Energía: ${dato.energia}" +
-                " Velocidad de sprint: ${dato.velocidadSprint}" +
+                " Energía: ${dato.energia}," +
+                " Velocidad de sprint: ${dato.velocidadSprint}," +
                 " Pasiva: ${dato.pasiva}")
     }
     escribirDatosXML(salidaXML, datos)

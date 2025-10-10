@@ -36,18 +36,17 @@ fun escribirDatosJSON(ruta: Path, warframes: List<WarframeJSON>) {
     }
 }
 
-fun main() {
+fun ejecutarJSON() {
     val entradaJSON = Path.of("game_data/JSON/Warframes.json")
     val salidaJSON = Path.of("game_data/JSON/Warframes2.json")
-    val datos: List<WarframeJSON>
-    datos = leerDatosInicialesJSON(entradaJSON)
+    val datos = leerDatosInicialesJSON(entradaJSON)
     for (dato in datos) {
         println(" - ID: ${dato.warframeId}," +
                 " Nombre: ${dato.name}," +
                 " Vida: ${dato.health}," +
                 " Armadura: ${dato.armor}," +
-                " Energía: ${dato.energy}" +
-                " Velocidad de sprint: ${dato.sprintSpeed}" +
+                " Energía: ${dato.energy}," +
+                " Velocidad de sprint: ${dato.sprintSpeed}," +
                 " Pasiva: ${dato.passive}")
     }
     escribirDatosJSON(salidaJSON, datos)

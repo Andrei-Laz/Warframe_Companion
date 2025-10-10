@@ -1,26 +1,23 @@
 import java.nio.file.Path
 
-fun convertJsonToXml (originRoute: Path, conversionRoute) {
-    val data: List<WarframeJSON>
-    data = leerDatosInicialesJSON(originRoute)
-
-    escribirDatosXML(conversionRoute, )
-}
-fun main() {
+fun ejecutarConversion() {
     val entradaJSON = Path.of("game_data/JSON/Warframes.json")
-    val salidaJSON = Path.of("game_data/Conversions/JSON_to_XML.xml")
-    val datos: List<WarframeJSON>
-    datos = leerDatosInicialesJSON(entradaJSON)
+    val salidaXML = Path.of("game_data/Conversions/JSON_to_XML.xml")
 
-    for (dato in datos) {
-        println(" - ID: ${dato.warframeId}," +
-                " Nombre: ${dato.name}," +
-                " Vida: ${dato.health}," +
-                " Armadura: ${dato.armor}," +
-                " Energía: ${dato.energy}" +
-                " Velocidad de sprint: ${dato.sprintSpeed}" +
-                " Pasiva: ${dato.passive}")
+    val datosJson = leerDatosInicialesJSON(entradaJSON)
+
+    val datosXml = datosJson.map {
+        WarframeXML(
+            warframeId = it.warframeId,
+            nombre = it.name,
+            vida = it.health,
+            armadura = it.armor,
+            energia = it.energy,
+            velocidadSprint = it.sprintSpeed,
+            pasiva = it.passive
+        )
     }
 
-    escribirDatosJSON(salidaJSON, datos)
+    escribirDatosXML(salidaXML, datosXml)
+    println("Conversión JSON → XML completada.")
 }

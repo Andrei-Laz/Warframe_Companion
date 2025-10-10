@@ -87,19 +87,17 @@ fun escribirDatosCSV(ruta: Path, warframes: List<WarframeCSV>){
     }
 }
 
-fun main() {
+fun ejecutarCSV() {
     val entradaCSV = Path.of("game_data/CSV/Warframes.csv")
     val salidaCSV = Path.of("game_data/CSV/Warframes2.csv")
-    val datos: List<WarframeCSV>
-    datos = leerDatosInicialesCSV(entradaCSV)
+    val datos = leerDatosInicialesCSV(entradaCSV)
     for (dato in datos) {
-
         println(" - ID: ${dato.warframeId}," +
                 " Nombre: ${dato.name}," +
                 " Vida: ${dato.health}," +
                 " Armadura: ${dato.armor}," +
-                " Energía: ${dato.energy}" +
-                " Velocidad de sprint: ${dato.sprintSpeed}" +
+                " Energía: ${dato.energy}," +
+                " Velocidad de sprint: ${dato.sprintSpeed}," +
                 " Pasiva: ${dato.passive}")
     }
     escribirDatosCSV(salidaCSV, datos)
