@@ -58,12 +58,8 @@ fun main() {
     importarDesdeJSON()
     mostrar()
 
-    println("\n--- Modificando registro ID=1 ---")
-    modificar(1, "Excalibur Prime", "Energía infinita")
-    mostrar()
+    println("\n=== MENÚ INTERACTIVO ===")
+    menuPrincipal()
 
-    println("\n--- Eliminando registro ID=2 ---")
-    eliminar(2)
-    mostrar()
 
 }
